@@ -1,0 +1,35 @@
+{
+  "name": "Mcafee Network Security Platform",
+  "version": "1.0",
+  "author": "Daniel Müller",
+  "url": "https://github.com/shaddowdaniel/Cortex/blob/main/Responders/mcafee_nsp",
+  "license": "AGPL-V3",
+  "description": "Automate Actions in McAfee NSP",
+  "dataTypeList": ["thehive:case", "thehive:alert", "thehive:case_task"],
+  "command": "mcafee_nsp.py",
+  "baseConfig": "mcafee_nsp",
+  "configurationItems": [
+    {
+      "name": "host",
+      "description": "The host to your Mcafee NSP Instance",
+      "type": "string",
+      "multi": false,
+      "required": true
+    },
+		{
+      "name": "user",
+      "description": "The User to your Mcafee NSP Instance",
+      "type": "string",
+      "multi": false,
+      "required": true
+    },
+    {
+      "name": "pass",
+      "description": "The Password of the your User",
+      "type": "string",
+      "multi": false,
+      "required": true
+    }
+  ]
+  
+}
