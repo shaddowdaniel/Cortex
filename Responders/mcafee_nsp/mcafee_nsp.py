@@ -11,26 +11,26 @@ import base64
 class McafeeNSP(Responder):
     def __init__(self):
         Responder.__init__(self)
-        self.user = self.get_param("config.user", "")
-	self.pass = self.get_param("config.pass", "")
-        self.host = self.get_param("config.url", "")
+        self.host = self.get_param("config.url", "localhost")
+        self.user = self.get_param("config.user", "user", None)
+        self.pwd = self.get_param("config.pass", "pwd", None)
 
     def run(self):
-	McafeeNSP.run(self)
-	
-	self.basic =  base64.b64decode(self.user+":"+self.pass)
-	url = "https://"+self.host+"/sdkapi/session"
-	payload={}
-	
-	headers = {
-  	'Content-Type': 'application/json',
-  	'Accept': 'application/vnd.nsm.v1.0+json',
-  	'NSM-SDK-API': self.basic
-	}
-	
-	login = requests.request("GET", url, headers=headers, data=payload)
-	
-	if login.status_code == 200:
+        Responder.run(self)
+        toencode = self.user+self.pwd
+        self.basic =  base64.b64encode(toencode.encode('ascii'))
+        url = "https://"+self.host+"/sdkapi/session"
+        payload={}
+
+        headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/vnd.nsm.v1.0+json',
+        'NSM-SDK-API': self.basic
+        }
+
+        login = requests.request("GET", url, headers=headers, data=payload)
+
+        if login.status_code == 200:
             self.report(login.text)
         else:
             self.error(login.status_code)
