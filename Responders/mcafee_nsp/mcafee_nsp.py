@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 # Author: Daniel Müller
+
 from cortexutils.responder import Responder
 import requests
 import json
 import base64
+
 
 class McafeeNSP(Responder):
     def __init__(self):
