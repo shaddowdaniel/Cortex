@@ -1,0 +1,38 @@
+{
+  "name": "mcafee_nsp_unlock",
+  "version": "1.0",
+  "author": "Daniel Müller",
+  "url": "https://github.com/shaddowdaniel/Cortex/blob/main/Responders/mcafee_nsp",
+  "license": "AGPL-V3",
+  "description": "Unlock ip on McAfee NSP",
+  "dataTypeList": ["thehive:case_artifact"],
+  "command": "mcafee_nsp/mcafee_nsp.py",
+  "baseConfig": "mcafee_nsp",
+  "config": {
+    "service": "unlock"
+  },
+  "configurationItems": [
+    {
+      "name": "host",
+      "description": "The host to your Mcafee NSP Instance",
+      "type": "string",
+      "multi": false,
+      "required": true
+    },
+		{
+      "name": "user",
+      "description": "The User to your Mcafee NSP Instance",
+      "type": "string",
+      "multi": false,
+      "required": true
+    },
+    {
+      "name": "pass",
+      "description": "The Password of the your User",
+      "type": "string",
+      "multi": false,
+      "required": true
+    }
+  ]
+  
+}
