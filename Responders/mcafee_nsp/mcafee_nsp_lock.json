@@ -1,13 +1,16 @@
 {
-  "name": "Mcafee Network Security Platform",
+  "name": "mcafee_nsp_lock",
   "version": "1.0",
   "author": "Daniel Müller",
   "url": "https://github.com/shaddowdaniel/Cortex/blob/main/Responders/mcafee_nsp",
   "license": "AGPL-V3",
-  "description": "Automate Actions in McAfee NSP",
-  "dataTypeList": ["thehive:case", "thehive:alert", "thehive:case_task"],
-  "command": "mcafee_nsp.py",
+  "description": "Lock ip on McAfee NSP",
+  "dataTypeList": ["thehive:case_artifact"],
+  "command": "mcafee_nsp/mcafee_nsp.py",
   "baseConfig": "mcafee_nsp",
+  "config": {
+    "service": "lock"
+  },
   "configurationItems": [
     {
       "name": "host",
