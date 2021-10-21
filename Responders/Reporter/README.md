@@ -1,22 +1,17 @@
 # Reporter
 
-A Cortex Responder for TheHive Project that creates a Markdown report for a given case.  This is a Work in Progress.
+Um Responder do Cortex para o TheHive que cria um relatório em Markdown de um determinado caso.
 
-# Installation
+# Instalação
 
-See `requirements.txt` for dependencies.
+Veja as dependências em `requirements.txt`.
 
-# Configuration
+# Configurção
 
-Within the Responder configuration the following configuration is required:
+Na configuração do Responder, a seguinte configuração é necessária:
 
-| Item | Description | example |
+| Item | Descrição | Exemplo |
 |------|-------------|---------|
-|tmp_file_location | a temporary path that is used to store the markdown file before it is attached to TheHive case then removed | `/opt/Cortex-Analyzers/github-aacgood/Responders/Reporter/tmp/` |
-|thehive_instance | the instance of TheHive you are integrating with | `http://server:9000` |
-|thehive_api | This is the API key from a user account that has been generated from TheHive | `random 32 character string`
-
-# ToDo
-
-- Automatically close the task that is generated for the report
-- Include the Observable description (just has the tag)
+|tmp_file_location | Um caminho temporário que é usado para armazenar o arquivo markdown antes de ser anexado ao caso TheHive e depois removido | `/opt/Cortex-Analyzers/github-aacgood/Responders/Reporter/tmp/` |
+|thehive_instance | A instância do TheHive com a qual você está se integrando | `http://server:9000` |
+|thehive_api | Esta é a chave de API de uma conta de usuário que foi gerada no TheHive | `random 32 character string`
