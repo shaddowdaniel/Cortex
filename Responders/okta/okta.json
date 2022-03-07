@@ -1,0 +1,42 @@
+{
+  "name": "Okta Automation",
+  "version": "1.0",
+  "author": "Daniel Müller",
+  "url": "https://github.com/shaddowdaniel/Cortex/blob/main/Responders/okta",
+  "license": "AGPL-V3",
+  "description": "Automate Actions in Okta",
+  "dataTypeList": ["thehive:case", "thehive:alert", "thehive:case_task"],
+  "command": "okta.py",
+  "baseConfig": "Okta",
+  "configurationItems": [
+    {
+      "name": "host",
+      "description": "The host to your Okta domain url",
+      "type": "string",
+      "multi": false,
+      "required": true
+    },
+		{
+      "name": "user",
+      "description": "The User to your Okta Admin",
+      "type": "string",
+      "multi": false,
+      "required": false
+    },
+    {
+      "name": "pass",
+      "description": "The Password of the your user",
+      "type": "string",
+      "multi": false,
+      "required": false
+    },
+    {
+      "name": "api_key",
+      "description": "The API-KEY of the your Okta Domain",
+      "type": "string",
+      "multi": false,
+      "required": true
+    }
+  ]
+  
+}
