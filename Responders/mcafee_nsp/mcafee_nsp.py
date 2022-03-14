@@ -41,47 +41,28 @@ class McafeeNSP(Responder):
         'Accept': 'application/vnd.nsm.v1.0+json',
         'NSM-SDK-API': self.basic
         }
-        data = str(ipaddress.IPv4Network(self.data))
+        data = str(ipaddress.IPv4Address(self.data))
         if self.service == "lock":
-            ruleObject = "173"
-            action = url+"ruleobject/"+ruleObject
-            listRuleObject = requests.get(action, headers=headers, data=payload, verify=False).json()
-            resp = json.dumps(listRuleObject)
-
+            action = url+"sensor/1006/action/quarantinehost"
+            #listQuarantine = requests.get(action, headers=headers, data=payload, verify=False).json()
+            #resp = json.dumps(listQuarantine)
             payload = {
-            'RuleObjDef': {
-            'visibleToChild': True, 
-            'description': listRuleObject['RuleObjDef']['description'], 
-            'ruleobjId': ruleObject, 
-            'name': listRuleObject['RuleObjDef']['name'], 
-            'ruleobjType': 'NETWORK_IPV_4',
-            'Network_IPV_4': listRuleObject['RuleObjDef']['Network_IPV_4']
-            }
-            }
-            payload['RuleObjDef']['Network_IPV_4']['networkIPV4List'].append(data)
-            payload = json.dumps(payload)
-            insertRuleObject = requests.put(action, headers=headers, data=payload, verify=False).json()
-            self.report(insertRuleObject) 
+                    "IPAddress": data,
+                    "Duration": "UNTIL_EXPLICITLY_RELEASED"
+                    }
+            quarantine = requests.post(action, headers=headers, json=payload, verify=False)
+            if quarantine.status_code == 200:
+                self.report(quarantine.json())
+            else:
+                self.error(quarantine.text)
 
-        elif self.service == "unlock":
-            ruleObject = "173"
-            action = url+"ruleobject/"+ruleObject
-            listRuleObject = requests.get(action, headers=headers, data=payload, verify=False).json()
-            payload = {
-            'RuleObjDef': {
-            'visibleToChild': True,
-            'description': listRuleObject['RuleObjDef']['description'], 
-            'ruleobjId': ruleObject, 
-            'name': listRuleObject['RuleObjDef']['name'], 
-            'ruleobjType': 'NETWORK_IPV_4',
-            'Network_IPV_4': listRuleObject['RuleObjDef']['Network_IPV_4']
-            }
-            }
-            payload['RuleObjDef']['Network_IPV_4']['networkIPV4List'].remove(data)
-            payload = json.dumps(payload)
-
-            removeRuleObject = requests.put(action, headers=headers, data=payload, verify=False).json()
-            self.report(removeRuleObject)
+        if self.service == "unlock":
+            action = url+"sensor/1006/action/quarantinehost/"+data
+            quarantine = requests.delete(action, headers=headers, verify=False)
+            if quarantine.status_code == 200:
+                self.report(quarantine.json())
+            else:
+                self.error(quarantine.text)
 
 if __name__ == '__main__':
     McafeeNSP().run()
