@@ -37,21 +37,21 @@ class okta(Responder):
         #if find_userid["status_code"] == 200:
         userid = str(find_userid[0]['id'])
         status = str(find_userid[0]['status'])
-
-        if self.service == "lock" and status == "ACTIVE":
+        datatype = self.get_param("data.dataType")
+        if self.service == "lock" and status == "ACTIVE" and datatype == "mail":
              url = "https://docktech.okta.com/api/v1/users/"+userid+"/lifecycle/suspend"
              lock = requests.post(url, headers=headers, json=payload)
 
              self.report({'status_code': str(lock.status_code),
-                 'message': 'User '+data+' success '+self.service})
+                 'message': 'User '+data+' success '+self.service+' Datatype '+datatype})
 
-        elif self.service == "unlock" and status == "SUSPENDED":
+        elif self.service == "unlock" and status == "SUSPENDED" and datatype == "mail":
              url = "https://docktech.okta.com/api/v1/users/"+userid+"/lifecycle/unsuspend"
              unlock = requests.post(url, headers=headers, json=payload)
              self.report({'status_code': str(unlock.status_code),
-                 'message': 'User '+data+' success '+self.service})
+                 'message': 'User '+data+' success '+self.service+' Datatype '+datatype})
         else:
-            self.error(self.service+" Error User:"+data+' Status '+status)
+            self.error(self.service+" Error User:"+data+' Status '+status+' Datatype '+datatype)
 
 if __name__ == '__main__':
     okta().run()
