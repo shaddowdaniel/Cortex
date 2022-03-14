@@ -6,7 +6,7 @@ import requests
 import json
 import base64
 import os
-
+import ipaddress
 
 class McafeeNSP(Responder):
     def __init__(self):
@@ -41,6 +41,7 @@ class McafeeNSP(Responder):
         'Accept': 'application/vnd.nsm.v1.0+json',
         'NSM-SDK-API': self.basic
         }
+        data = str(ipaddress.IPv4Network(self.data))
         if self.service == "lock":
             ruleObject = "173"
             action = url+"ruleobject/"+ruleObject
@@ -57,7 +58,7 @@ class McafeeNSP(Responder):
             'Network_IPV_4': listRuleObject['RuleObjDef']['Network_IPV_4']
             }
             }
-            payload['RuleObjDef']['Network_IPV_4']['networkIPV4List'].append(self.data)
+            payload['RuleObjDef']['Network_IPV_4']['networkIPV4List'].append(data)
             payload = json.dumps(payload)
             insertRuleObject = requests.put(action, headers=headers, data=payload, verify=False).json()
             self.report(insertRuleObject) 
@@ -76,7 +77,7 @@ class McafeeNSP(Responder):
             'Network_IPV_4': listRuleObject['RuleObjDef']['Network_IPV_4']
             }
             }
-            payload['RuleObjDef']['Network_IPV_4']['networkIPV4List'].remove(self.data)
+            payload['RuleObjDef']['Network_IPV_4']['networkIPV4List'].remove(data)
             payload = json.dumps(payload)
 
             removeRuleObject = requests.put(action, headers=headers, data=payload, verify=False).json()
