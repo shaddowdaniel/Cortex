@@ -1,0 +1,45 @@
+{
+  "name": "AWS WAFv2 Unlock Automation",
+  "version": "1.0",
+  "author": "Daniel Müller",
+  "url": "https://github.com/shaddowdaniel/Cortex/blob/main/Responders/okta",
+  "license": "AGPL-V3",
+  "description": "Automate Actions in AWS WAFv2",
+  "dataTypeList": ["thehive:case_artifact"],
+  "command": "aws_waf/aws_waf.py",
+  "baseConfig": "aws_waf",
+  "config": {
+    "service": "unlock"
+  },
+  "configurationItems": [
+    {
+      "name": "arn",
+      "description": "The IAM role ARN",
+      "type": "string",
+      "multi": false,
+      "required": true
+    },
+    {
+      "name": "client_id",
+      "description": "The CLIENT_ID of the your AWS Account",
+      "type": "string",
+      "multi": false,
+      "required": true
+    },
+    {
+      "name": "client_secret",
+      "description": "The CLIENT_SECRET of the your AWS Account",
+      "type": "string",
+      "multi": false,
+      "required": true
+    },
+    {
+      "name": "region",
+      "description": "The REGION of the your AWS Account",
+      "type": "string",
+      "multi": false,
+      "required": true
+    }
+  ]
+  
+}
