@@ -1,0 +1,38 @@
+{
+  "name": "Cloudflare Unlock Automation",
+  "version": "1.0",
+  "author": "Daniel Müller",
+  "url": "https://github.com/shaddowdaniel/Cortex/blob/main/Responders/okta",
+  "license": "AGPL-V3",
+  "description": "Automate Actions in Cloudflare",
+  "dataTypeList": ["thehive:case_artifact"],
+  "command": "cloudflare/cloudflare.py",
+  "baseConfig": "cloudflare",
+  "config": {
+    "service": "unlock"
+  },
+  "configurationItems": [
+    {
+      "name": "account_identifier",
+      "description": "The account_identifier to your Cloudflare Account",
+      "type": "string",
+      "multi": false,
+      "required": true
+    },
+    {
+      "name": "api_key",
+      "description": "The API-KEY of the your Cloudflare Domain",
+      "type": "string",
+      "multi": false,
+      "required": true
+    },
+    {
+      "name": "mail",
+      "description": "The MAIL of the your Cloudflare request User",
+      "type": "string",
+      "multi": false,
+      "required": true
+    }
+  ]
+  
+}
