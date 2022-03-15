@@ -5,8 +5,6 @@
 from cortexutils.responder import Responder
 import requests
 import json
-import base64
-import ipaddress
 
 class cloudflare(Responder):
     def __init__(self):
