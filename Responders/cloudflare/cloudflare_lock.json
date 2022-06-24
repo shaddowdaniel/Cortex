@@ -2,7 +2,7 @@
   "name": "Cloudflare Lock Automation",
   "version": "1.0",
   "author": "Daniel Müller",
-  "url": "https://github.com/shaddowdaniel/Cortex/blob/main/Responders/okta",
+  "url": "https://github.com/shaddowdaniel/Cortex/blob/main/Responders/cloudflare",
   "license": "AGPL-V3",
   "description": "Automate Actions in Cloudflare",
   "dataTypeList": ["thehive:case_artifact"],
